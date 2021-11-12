@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 
 # models の前にあるドットは カレントディレクトリ 、もしくは カレントアプリケーション のことです。
@@ -14,6 +14,10 @@ def post_list(request):
     # {}: 指定した情報を、テンプレートが表示してくれます。
     # {} の中に引数を記述する時は、名前と値をセットにしなくてはなりません。
     return render(request, 'blog/post_list.html', {'posts':posts})
+
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'blog/post_detail.html', {'post': post})
     
 
 
